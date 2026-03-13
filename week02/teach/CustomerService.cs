@@ -5,14 +5,14 @@
 public class CustomerService {
     public static void Run() {
         // Example code to see what's in the customer service queue:
-        // var cs = new CustomerService(10);
-        // Console.WriteLine(cs);
+        var cs = new CustomerService(10);
+        Console.WriteLine(cs);
+
 
         // Test Cases
 
         // Test 1
-        // Scenario: 
-        // Expected Result: 
+        // Expected Result:
         Console.WriteLine("Test 1");
 
         // Defect(s) Found: 
@@ -35,7 +35,7 @@ public class CustomerService {
     private readonly int _maxSize;
 
     public CustomerService(int maxSize) {
-        if (maxSize <= 0)
+        if (maxSize <= 0 || maxSize > 10)
             _maxSize = 10;
         else
             _maxSize = maxSize;
@@ -67,7 +67,7 @@ public class CustomerService {
     /// </summary>
     private void AddNewCustomer() {
         // Verify there is room in the service queue
-        if (_queue.Count > _maxSize) {
+        if (_queue.Count == _maxSize) {
             Console.WriteLine("Maximum Number of Customers in Queue.");
             return;
         }
@@ -84,11 +84,16 @@ public class CustomerService {
         _queue.Add(customer);
     }
 
+    private void GetV()
+    {
+        return _queue.RemoveAt(0);
+    }
+
     /// <summary>
     /// Dequeue the next customer and display the information.
     /// </summary>
-    private void ServeCustomer() {
-        _queue.RemoveAt(0);
+    private void ServeCustomer(void v) {
+        v;
         var customer = _queue[0];
         Console.WriteLine(customer);
     }
@@ -102,5 +107,12 @@ public class CustomerService {
     /// <returns>A string representation of the queue</returns>
     public override string ToString() {
         return $"[size={_queue.Count} max_size={_maxSize} => " + string.Join(", ", _queue) + "]";
+    }
+}
+
+internal class AddNewCustomer<T>
+{
+    public AddNewCustomer()
+    {
     }
 }
